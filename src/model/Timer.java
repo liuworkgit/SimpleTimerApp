@@ -1,4 +1,4 @@
-package ui;
+package model;
 
 // represents a timer
 public class Timer {
