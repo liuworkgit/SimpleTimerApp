@@ -13,8 +13,8 @@ public class Timer {
         isCountingDown = false;
     }
 
-    // REQUIRES: fullTime length is 3-4 digits - otherwise, throw WrongLengthException
-    //           The first digit/two digits that correspond to minutes must be between 0 and 12
+    // REQUIRES: fullTime length is 4 digits - otherwise, throw WrongLengthException
+    //           The first two digits that correspond to minutes must be between 0 and 12
     //           The remaining two digits that correspond to seconds must be between 00 and 59
     // EFFECTS: sets a time
     // MODIFIES: this, mins, secs
@@ -22,6 +22,10 @@ public class Timer {
     // TODO - THROW EXCEPTION IF INPUTTED TIME INVALID
     // ex: mins must be between 0 and 12, secs must be between 0 and 59
     public void setTime(String fullTime) throws WrongLengthException, InvalidTimeException {}
+
+    // REQUIRES: isCountingDown == false
+    // EFFECTS: runs the timer from start to finish
+    public void runTimer() {}
 
     // EFFECTS: starts the timer by setting isCountingDown to true
     public void startTimer() {}
