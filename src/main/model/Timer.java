@@ -21,7 +21,7 @@ public class Timer {
     // TODO - THROW EXCEPTION IF FULLTIME WRONG LENGTH
     // TODO - THROW EXCEPTION IF INPUTTED TIME INVALID
     // ex: mins must be between 0 and 12, secs must be between 0 and 59
-    public void setTime(int fullTime) throws WrongLengthException, InvalidTimeException {}
+    public void setTime(String fullTime) throws WrongLengthException, InvalidTimeException {}
 
     // EFFECTS: starts the timer by setting isCountingDown to true
     public void startTimer() {}

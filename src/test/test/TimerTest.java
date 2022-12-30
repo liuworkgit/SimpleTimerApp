@@ -25,12 +25,15 @@ class TimerTest {
     }
 
     @Test
-    void setRightLengthTime() {
+    void setValidTimes() {
         try {
-            testTimer.setTime(532);
+            testTimer.setTime("0532");
             assertEquals(5, testTimer.getMins());
             assertEquals(32, testTimer.getSecs());
-            assertFalse(testTimer.getCountdownStatus());
+
+            testTimer.setTime("0000");
+            assertEquals(0, testTimer.getMins());
+            assertEquals(0, testTimer.getSecs());
         } catch (WrongLengthException e) {
             fail("Exception thrown when shouldn't have.");
         } catch (InvalidTimeException e) {
