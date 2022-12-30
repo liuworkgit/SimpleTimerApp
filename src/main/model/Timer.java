@@ -16,7 +16,9 @@ public class Timer {
     // EFFECTS: sets a time
     // MODIFIES: this, mins, secs
     // TODO - THROW EXCEPTION IF FULLTIME WRONG LENGTH
-    public void setTime(int fullTime) {}
+    // TODO - THROW EXCEPTION IF INPUTTED TIME INVALID
+    // ex: mins must be between 0 and 12, secs must be between 0 and 59
+    public void setTime(int fullTime) throws WrongLengthException, InvalidTimeException {}
 
     // EFFECTS: starts the timer by setting isCountingDown to true
     public void startTimer() {}
