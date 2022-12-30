@@ -6,16 +6,16 @@ public class Timer {
     private int secs;
     private boolean isCountingDown;
 
-    // TODO - SINGLE INSTANCE OR NOT?
     // EFFECTS: creates a new timer object
     public Timer() {
         mins = 0;
         secs = 0;
     }
 
-    // REQUIRES: fullTime length is four digits
+    // REQUIRES: fullTime length is four digits - otherwise, throw WrongLengthException
     // EFFECTS: sets a time
     // MODIFIES: this, mins, secs
+    // TODO - THROW EXCEPTION IF FULLTIME WRONG LENGTH
     public void setTime(int fullTime) {}
 
     // EFFECTS: starts the timer by setting isCountingDown to true
