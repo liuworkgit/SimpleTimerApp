@@ -10,9 +10,12 @@ public class Timer {
     public Timer() {
         mins = 0;
         secs = 0;
+        isCountingDown = false;
     }
 
-    // REQUIRES: fullTime length is four digits - otherwise, throw WrongLengthException
+    // REQUIRES: fullTime length is 3-4 digits - otherwise, throw WrongLengthException
+    //           The first digit/two digits that correspond to minutes must be between 0 and 12
+    //           The remaining two digits that correspond to seconds must be between 00 and 59
     // EFFECTS: sets a time
     // MODIFIES: this, mins, secs
     // TODO - THROW EXCEPTION IF FULLTIME WRONG LENGTH
@@ -37,4 +40,18 @@ public class Timer {
     // EFFECTS: plays alarm
     // TODO - THROW EXCEPTION IF COUNTING DOWN?
     public void playAlarm() {}
+
+    // GETTERS
+
+    public int getMins() {
+        return mins;
+    }
+
+    public int getSecs() {
+        return secs;
+    }
+
+    public boolean getCountdownStatus() {
+        return isCountingDown;
+    }
 }
