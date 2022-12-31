@@ -1,6 +1,7 @@
 package test;
 
 import model.InvalidTimeException;
+import model.NotCountingDownException;
 import model.WrongLengthException;
 import model.Timer;
 
@@ -139,8 +140,38 @@ class TimerTest {
     void testCountDownSecondsOnly() {
         try {
             testTimer.setTime("0005");
+            testTimer.countDown();
+            while (testTimer.getSecs() > 0) {
+                assertTrue(testTimer.getCountdownStatus());
+            }
+            assertFalse(testTimer.getCountdownStatus());
+            assertEquals(0, testTimer.getMins());
+            assertEquals(0, testTimer.getSecs());
             // while loop runs, assert isCountingDown is true
             // after loop, mins and secs must be 0
+        } catch (NotCountingDownException e) {
+            fail("Exception shouldn't have been thrown (was counting down)");
+        } catch (WrongLengthException | InvalidTimeException e) {
+            fail("Exception should't have been thrown.");
+        }
+    }
+
+    @Test
+    void testCountDownOneMinute() {
+        try {
+            testTimer.setTime("0100");
+            testTimer.countDown();
+            do {
+                assertTrue(testTimer.getCountdownStatus());
+            }
+            while (testTimer.getMins() != 0 | testTimer.getSecs() != 0);
+            assertFalse(testTimer.getCountdownStatus());
+            assertEquals(0, testTimer.getMins());
+            assertEquals(0, testTimer.getSecs());
+            // while loop runs, assert isCountingDown is true
+            // after loop, mins and secs must be 0
+        } catch (NotCountingDownException e) {
+            fail("Exception should've have been thrown (was counting down)");
         } catch (WrongLengthException | InvalidTimeException e) {
             fail("Exception should't have been thrown.");
         }
@@ -148,5 +179,6 @@ class TimerTest {
 
     @Test
     void playAlarm() {
-    }
+
+    } // TODO - IMPLEMENT DURING GUI PHASE
 }

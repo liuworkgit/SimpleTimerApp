@@ -41,13 +41,13 @@ public class Timer {
     //           otherwise, throw NotCountingDownException
     // EFFECTS: counts down
     // TODO - THROW EXCEPTION IF NOT COUNTING DOWN?
-    public void countDown() {}
+    public void countDown() throws NotCountingDownException {}
 
     // REQUIRES: isCountingDown == false
     //           otherwise, throw CountdownActiveException
     // EFFECTS: plays alarm
     // TODO - THROW EXCEPTION IF COUNTING DOWN?
-    public void playAlarm() {}
+    public void playAlarm() throws CountdownActiveException {}
 
     // GETTERS
 
