@@ -1,8 +1,8 @@
 package test;
 
-import model.InvalidTimeException;
-import model.NotCountingDownException;
-import model.WrongLengthException;
+import exceptions.InvalidTimeException;
+import exceptions.NotCountingDownException;
+import exceptions.WrongLengthException;
 import model.Timer;
 
 import org.junit.jupiter.api.BeforeEach;

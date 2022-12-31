@@ -1,4 +1,10 @@
 package model;
+
+import exceptions.CountdownActiveException;
+import exceptions.InvalidTimeException;
+import exceptions.NotCountingDownException;
+import exceptions.WrongLengthException;
+
 // TODO - LATER CREATE METHOD THAT CHECKS TO SEE IF TIMER IS 00:00
 // represents a timer
 public class Timer {
