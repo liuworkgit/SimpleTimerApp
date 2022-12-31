@@ -89,27 +89,61 @@ class TimerTest {
             assertFalse(testTimer.getCountdownStatus());
             assertEquals(0, testTimer.getMins());
             assertEquals(0, testTimer.getSecs());
-        } catch (WrongLengthException e) {
-            fail("Exception thrown when shouldn't have.");
-        } catch (InvalidTimeException e) {
+        } catch (WrongLengthException | InvalidTimeException e) {
             fail("Exception thrown when shouldn't have.");
         }
     }
 
     @Test
-    void startTimer() {
+    void testStartTimer() {
+        testTimer.startTimer();
+        assertTrue(testTimer.getCountdownStatus());
     }
 
     @Test
-    void stopTimer() {
+    void testStopTimer() {
+        testTimer.stopTimer();
+        assertFalse(testTimer.getCountdownStatus());
     }
 
     @Test
-    void resetTimer() {
+    void testResetStoppedTimer() {
+        try {
+            testTimer.setTime("0139");
+            assertEquals(1, testTimer.getMins());
+            assertEquals(39, testTimer.getSecs());
+            testTimer.resetTimer();
+            assertEquals(0, testTimer.getMins());
+            assertEquals(0, testTimer.getSecs());
+        } catch (WrongLengthException | InvalidTimeException e) {
+            fail("shouldn't have thrown exception.");
+        }
     }
 
     @Test
-    void countDown() {
+    void testResetCountingTimer() {
+        try {
+            testTimer.setTime("0540");
+            testTimer.runTimer();
+            assertTrue(testTimer.getCountdownStatus());
+            testTimer.resetTimer();
+            assertFalse(testTimer.getCountdownStatus());
+            assertEquals(0, testTimer.getMins());
+            assertEquals(0, testTimer.getSecs());
+        } catch (WrongLengthException | InvalidTimeException e) {
+            fail("Shouldn't have thrown exception.");
+        }
+    }
+
+    @Test
+    void testCountDownSecondsOnly() {
+        try {
+            testTimer.setTime("0005");
+            // while loop runs, assert isCountingDown is true
+            // after loop, mins and secs must be 0
+        } catch (WrongLengthException | InvalidTimeException e) {
+            fail("Exception should't have been thrown.");
+        }
     }
 
     @Test

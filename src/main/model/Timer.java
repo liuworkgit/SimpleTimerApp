@@ -1,12 +1,12 @@
 package model;
-
+// TODO - LATER CREATE METHOD THAT CHECKS TO SEE IF TIMER IS 00:00
 // represents a timer
 public class Timer {
     private int mins;
     private int secs;
     private boolean isCountingDown;
 
-    // EFFECTS: creates a new timer object
+    // EFFECTS: creates a new timer object that has 0 mins, 0 secs, and isCountingDown == false
     public Timer() {
         mins = 0;
         secs = 0;
@@ -30,17 +30,21 @@ public class Timer {
     // EFFECTS: starts the timer by setting isCountingDown to true
     public void startTimer() {}
 
-    // EFFECTS: stops the timer
+    // EFFECTS: stops the timer by setting isCountingDown to false
     public void stopTimer() {}
 
     // EFFECTS: resets the timer.
-    //          if isCountingDown == false, calls stopTimer(), then resets the timer
+    //          if isCountingDown == true, calls stopTimer(), then resets the timer
     public void resetTimer() {}
 
+    // REQUIRES: isCountingDown == true
+    //           otherwise, throw NotCountingDownException
     // EFFECTS: counts down
     // TODO - THROW EXCEPTION IF NOT COUNTING DOWN?
     public void countDown() {}
 
+    // REQUIRES: isCountingDown == false
+    //           otherwise, throw CountdownActiveException
     // EFFECTS: plays alarm
     // TODO - THROW EXCEPTION IF COUNTING DOWN?
     public void playAlarm() {}
