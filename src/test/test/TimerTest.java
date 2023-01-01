@@ -87,6 +87,10 @@ class TimerTest {
         try {
             testTimer.setTime("0130");
             testTimer.runTimer();
+            do {
+                assertTrue(testTimer.getCountdownStatus());
+            }
+            while (testTimer.getMins() != 0 | testTimer.getSecs() != 0);
             assertFalse(testTimer.getCountdownStatus());
             assertEquals(0, testTimer.getMins());
             assertEquals(0, testTimer.getSecs());

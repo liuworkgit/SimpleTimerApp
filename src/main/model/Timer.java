@@ -22,38 +22,77 @@ public class Timer {
     // REQUIRES: fullTime length is 4 digits - otherwise, throw WrongLengthException
     //           The first two digits that correspond to minutes must be between 0 and 12
     //           The remaining two digits that correspond to seconds must be between 00 and 59
+    //           If inputted number can't be reasonably parsed into mins and secs, throw InvalidTimeException
     // EFFECTS: sets a time
     // MODIFIES: this, mins, secs
-    // TODO - THROW EXCEPTION IF FULLTIME WRONG LENGTH
-    // TODO - THROW EXCEPTION IF INPUTTED TIME INVALID
     // ex: mins must be between 0 and 12, secs must be between 0 and 59
-    public void setTime(String fullTime) throws WrongLengthException, InvalidTimeException {}
+    public void setTime(String fullTime) throws WrongLengthException, InvalidTimeException {
+        if (fullTime.length() != 4) {
+            throw new WrongLengthException();
+        } else {
+            int newMins = Integer.parseInt(fullTime.substring(0, 2));
+            int newSecs = Integer.parseInt(fullTime.substring(2, 4));
+            if (areCorrectValues(newMins, newSecs)) {
+                mins = newMins;
+                secs = newSecs;
+            } else {
+                throw new InvalidTimeException();
+            }
+        }
+    }
+
+    // EFFECTS: returns true if the given mins value is between 0 and 12,
+    //          and if the given secs value is between 0 and 59
+    public boolean areCorrectValues(int mins, int secs) {
+        boolean minsCorrect = (0 <= mins) && (mins <= 12);
+        boolean secsCorrect = (0 <= secs) && (secs <= 59);
+        return minsCorrect && secsCorrect;
+    }
 
     // REQUIRES: isCountingDown == false
     // EFFECTS: runs the timer from start to finish
-    public void runTimer() {}
+    public void runTimer() {
+    }
 
     // EFFECTS: starts the timer by setting isCountingDown to true
-    public void startTimer() {}
+    // MODIFIES: this, isCountingDown
+    public void startTimer() {
+        isCountingDown = true;
+    }
 
     // EFFECTS: stops the timer by setting isCountingDown to false
-    public void stopTimer() {}
+    // MODIFIES: this, isCountingDown
+    public void stopTimer() {
+        isCountingDown = false;
+    }
 
     // EFFECTS: resets the timer.
     //          if isCountingDown == true, calls stopTimer(), then resets the timer
-    public void resetTimer() {}
+    // MODIFIES: this, mins, secs, isCountingDown
+    public void resetTimer() {
+        if (isCountingDown) {
+            stopTimer();
+        }
+        mins = 0;
+        secs = 0;
+    }
 
     // REQUIRES: isCountingDown == true
     //           otherwise, throw NotCountingDownException
-    // EFFECTS: counts down
-    // TODO - THROW EXCEPTION IF NOT COUNTING DOWN?
-    public void countDown() throws NotCountingDownException {}
+    // EFFECTS: counts down the timer value
+    public void countDown() throws NotCountingDownException {
+        if (isCountingDown) {
+            throw new NotCountingDownException();
+        } else {
+
+        }
+    }
 
     // REQUIRES: isCountingDown == false
     //           otherwise, throw CountdownActiveException
     // EFFECTS: plays alarm
-    // TODO - THROW EXCEPTION IF COUNTING DOWN?
-    public void playAlarm() throws CountdownActiveException {}
+    public void playAlarm() throws CountdownActiveException {
+    }
 
     // GETTERS
 
