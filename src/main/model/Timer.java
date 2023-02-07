@@ -44,14 +44,24 @@ public class Timer {
     // EFFECTS: returns true if the given mins value is between 0 and 12,
     //          and if the given secs value is between 0 and 59
     public boolean areCorrectValues(int mins, int secs) {
-        boolean minsCorrect = (0 <= mins) && (mins <= 12);
-        boolean secsCorrect = (0 <= secs) && (secs <= 59);
-        return minsCorrect && secsCorrect;
+        return ((0 <= mins) && (mins <= 12)) && ((0 <= secs) && (secs <= 59));
     }
 
     // REQUIRES: isCountingDown == false
     // EFFECTS: runs the timer from start to finish
+    // TODO
     public void runTimer() {
+        try {
+            startTimer();
+            countDown();
+            playAlarm();
+        } catch (NotCountingDownException e) {
+            System.out.println("Countdown didn't start.");
+            // TODO - WHAT GOES HERE?
+        } catch (CountdownActiveException e) {
+            System.out.println("Countdown didn't end.");
+            // TODO - WHAT GOES HERE?
+        }
     }
 
     // EFFECTS: starts the timer by setting isCountingDown to true
@@ -79,18 +89,26 @@ public class Timer {
 
     // REQUIRES: isCountingDown == true
     //           otherwise, throw NotCountingDownException
-    // EFFECTS: counts down the timer value
+    // EFFECTS: counts down the timer value to 0
+    // TODO
     public void countDown() throws NotCountingDownException {
         if (isCountingDown) {
-            throw new NotCountingDownException();
+//            if (mins = 0) {
+//                countDownSecs(secs);
+//            } else {
+//
+//            }
+//            // base case: mins = 0
+//            // reducing step: mins -= 1
         } else {
-
+            throw new NotCountingDownException();
         }
     }
 
     // REQUIRES: isCountingDown == false
     //           otherwise, throw CountdownActiveException
     // EFFECTS: plays alarm
+    // TODO
     public void playAlarm() throws CountdownActiveException {
     }
 

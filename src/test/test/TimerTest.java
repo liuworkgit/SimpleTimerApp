@@ -4,10 +4,8 @@ import exceptions.InvalidTimeException;
 import exceptions.NotCountingDownException;
 import exceptions.WrongLengthException;
 import model.Timer;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TimerTest {
@@ -95,7 +93,7 @@ class TimerTest {
             assertEquals(0, testTimer.getMins());
             assertEquals(0, testTimer.getSecs());
         } catch (WrongLengthException | InvalidTimeException e) {
-            fail("Exception thrown when shouldn't have.");
+            fail("Issue with setTime().");
         }
     }
 
