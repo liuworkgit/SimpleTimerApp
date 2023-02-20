@@ -13,7 +13,7 @@ public class Timer {
     private int secs;
     private boolean isCountingDown;
 
-    // EFFECTS: creates a new timer object that has 0 mins, 0 secs, and isCountingDown == false
+    // EFFECTS: creates a new timer object that has 0 hours, 0 mins, 0 secs, and isCountingDown == false
     public Timer() {
         mins = 0;
         secs = 0;
