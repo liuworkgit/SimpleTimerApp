@@ -28,19 +28,20 @@ public class Timer {
     //           If inputted number can't be reasonably parsed, throw InvalidTimeException
     // EFFECTS: sets a time
     // MODIFIES: this, hours, mins, secs
+    // TODO - TEMP COMMENTING
     public void setTime(String fullTime) throws WrongLengthException, InvalidTimeException {
-        if (fullTime.length() != 4) {
-            throw new WrongLengthException();
-        } else {
-            int newMins = Integer.parseInt(fullTime.substring(0, 2));
-            int newSecs = Integer.parseInt(fullTime.substring(2, 4));
-            if (areCorrectValues(newMins, newSecs)) {
-                mins = newMins;
-                secs = newSecs;
-            } else {
-                throw new InvalidTimeException();
-            }
-        }
+//        if (fullTime.length() != 4) {
+//            throw new WrongLengthException();
+//        } else {
+//            int newMins = Integer.parseInt(fullTime.substring(0, 2));
+//            int newSecs = Integer.parseInt(fullTime.substring(2, 4));
+//            if (areCorrectValues(newMins, newSecs)) {
+//                mins = newMins;
+//                secs = newSecs;
+//            } else {
+//                throw new InvalidTimeException();
+//            }
+//        }
     }
 
     // EFFECTS: returns true if:

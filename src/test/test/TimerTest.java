@@ -9,46 +9,76 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TimerTest {
-    private Timer timer;
+    private Timer t;
 
     @BeforeEach
     void runBefore() {
-        timer = new Timer();
+        t = new Timer();
     }
 
     @Test
+    /** Test constructor
+     * */
     void testConstructor() {
-        assertEquals(0, timer.getHours());
-        assertEquals(0, timer.getMins());
-        assertEquals(0, timer.getSecs());
-        assertFalse(timer.getCountdownStatus());
+        assertEquals(0, t.getHours());
+        assertEquals(0, t.getMins());
+        assertEquals(0, t.getSecs());
+        assertFalse(t.getCountdownStatus());
     }
 
     @Test
+    /**
+     * Tests if able to set valid times, such as:
+     * - 99 hours, 59 minutes, 59 seconds
+     * - only hours and minutes
+     * - only minutes and seconds
+     * - only hours and seconds
+     * - all zeroes
+     * - random values for hours, minutes and seconds
+     * */
     void testSetValidTimes() {
         try {
-            timer.setTime("0532");
-            assertEquals(5, timer.getMins());
-            assertEquals(32, timer.getSecs());
+            t.setTime("995959");
+            assertEquals(99, t.getHours());
+            assertEquals(59, t.getMins());
+            assertEquals(59, t.getSecs());
 
-            timer.setTime("0000");
-            assertEquals(0, timer.getMins());
-            assertEquals(0, timer.getSecs());
+            t.setTime("013100");
+            assertEquals(1, t.getHours());
+            assertEquals(31, t.getMins());
+            assertEquals(0, t.getSecs());
 
-            timer.setTime("1259");
-            assertEquals(12, timer.getMins());
-            assertEquals(59, timer.getSecs());
-        } catch (WrongLengthException e) {
-            fail("Exception thrown when shouldn't have.");
-        } catch (InvalidTimeException e) {
+            t.setTime("005859");
+            assertEquals(0, t.getHours());
+            assertEquals(58, t.getMins());
+            assertEquals(59, t.getSecs());
+
+            t.setTime("230002");
+            assertEquals(23, t.getHours());
+            assertEquals(0, t.getMins());
+            assertEquals(2, t.getSecs());
+
+            t.setTime("000000");
+            assertEquals(0, t.getHours());
+            assertEquals(0, t.getMins());
+            assertEquals(0, t.getSecs());
+
+            t.setTime("381924");
+            assertEquals(38, t.getHours());
+            assertEquals(19, t.getMins());
+            assertEquals(24, t.getSecs());
+        } catch (WrongLengthException | InvalidTimeException e) {
             fail("Exception thrown when shouldn't have.");
         }
     }
 
     @Test
+    /**
+     * Tests if exception thrown when inputted time string is too short
+     * */
     void testSetTooShortTime() {
         try {
-            timer.setTime("532");
+            t.setTime("532");
             fail("Time wrong length.");
         } catch (WrongLengthException e) {
             // pass
@@ -58,9 +88,12 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests if exception thrown when inputted time string is too long
+     * */
     void testSetTooLongTime() {
         try {
-            timer.setTime("00532");
+            t.setTime("00000532");
             fail("Time wrong length.");
         } catch (WrongLengthException e) {
             // pass
@@ -70,9 +103,12 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests if exception thrown with invalid time string is entered. Length is correct
+     * */
     void testSetInvalidTime() {
         try {
-            timer.setTime("5900");
+            t.setTime("006061");
             fail("Invalid time entered.");
         } catch (WrongLengthException e) {
             fail("Wrong exception thrown.");
@@ -82,17 +118,20 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests if time can be run from arbitrary valid time
+     * */
     void testRunTimer() {
         try {
-            timer.setTime("0130");
-            timer.runTimer();
+            t.setTime("000130");
+            t.runTimer();
             do {
-                assertTrue(timer.getCountdownStatus());
+                assertTrue(t.getCountdownStatus());
             }
-            while (timer.getMins() != 0 | timer.getSecs() != 0);
-            assertFalse(timer.getCountdownStatus());
-            assertEquals(0, timer.getMins());
-            assertEquals(0, timer.getSecs());
+            while (t.getMins() != 0 | t.getSecs() != 0);
+            assertFalse(t.getCountdownStatus());
+            assertEquals(0, t.getMins());
+            assertEquals(0, t.getSecs());
         } catch (WrongLengthException | InvalidTimeException e) {
             fail("Issue with setTime().");
         }
@@ -100,25 +139,25 @@ class TimerTest {
 
     @Test
     void testStartTimer() {
-        timer.startTimer();
-        assertTrue(timer.getCountdownStatus());
+        t.startTimer();
+        assertTrue(t.getCountdownStatus());
     }
 
     @Test
     void testStopTimer() {
-        timer.stopTimer();
-        assertFalse(timer.getCountdownStatus());
+        t.stopTimer();
+        assertFalse(t.getCountdownStatus());
     }
 
     @Test
     void testResetStoppedTimer() {
         try {
-            timer.setTime("0139");
-            assertEquals(1, timer.getMins());
-            assertEquals(39, timer.getSecs());
-            timer.resetTimer();
-            assertEquals(0, timer.getMins());
-            assertEquals(0, timer.getSecs());
+            t.setTime("0139");
+            assertEquals(1, t.getMins());
+            assertEquals(39, t.getSecs());
+            t.resetTimer();
+            assertEquals(0, t.getMins());
+            assertEquals(0, t.getSecs());
         } catch (WrongLengthException | InvalidTimeException e) {
             fail("shouldn't have thrown exception.");
         }
@@ -127,13 +166,13 @@ class TimerTest {
     @Test
     void testResetCountingTimer() {
         try {
-            timer.setTime("0540");
-            timer.runTimer();
-            assertTrue(timer.getCountdownStatus());
-            timer.resetTimer();
-            assertFalse(timer.getCountdownStatus());
-            assertEquals(0, timer.getMins());
-            assertEquals(0, timer.getSecs());
+            t.setTime("0540");
+            t.runTimer();
+            assertTrue(t.getCountdownStatus());
+            t.resetTimer();
+            assertFalse(t.getCountdownStatus());
+            assertEquals(0, t.getMins());
+            assertEquals(0, t.getSecs());
         } catch (WrongLengthException | InvalidTimeException e) {
             fail("Shouldn't have thrown exception.");
         }
@@ -142,14 +181,14 @@ class TimerTest {
     @Test
     void testCountDownSecondsOnly() {
         try {
-            timer.setTime("0005");
-            timer.countDown();
-            while (timer.getSecs() > 0) {
-                assertTrue(timer.getCountdownStatus());
+            t.setTime("0005");
+            t.countDown();
+            while (t.getSecs() > 0) {
+                assertTrue(t.getCountdownStatus());
             }
-            assertFalse(timer.getCountdownStatus());
-            assertEquals(0, timer.getMins());
-            assertEquals(0, timer.getSecs());
+            assertFalse(t.getCountdownStatus());
+            assertEquals(0, t.getMins());
+            assertEquals(0, t.getSecs());
             // while loop runs, assert isCountingDown is true
             // after loop, mins and secs must be 0
         } catch (NotCountingDownException e) {
@@ -162,15 +201,15 @@ class TimerTest {
     @Test
     void testCountDownOneMinute() {
         try {
-            timer.setTime("0100");
-            timer.countDown();
+            t.setTime("0100");
+            t.countDown();
             do {
-                assertTrue(timer.getCountdownStatus());
+                assertTrue(t.getCountdownStatus());
             }
-            while (timer.getMins() != 0 | timer.getSecs() != 0);
-            assertFalse(timer.getCountdownStatus());
-            assertEquals(0, timer.getMins());
-            assertEquals(0, timer.getSecs());
+            while (t.getMins() != 0 | t.getSecs() != 0);
+            assertFalse(t.getCountdownStatus());
+            assertEquals(0, t.getMins());
+            assertEquals(0, t.getSecs());
             // while loop runs, assert isCountingDown is true
             // after loop, mins and secs must be 0
         } catch (NotCountingDownException e) {
