@@ -6,7 +6,8 @@ import exceptions.NotCountingDownException;
 import exceptions.WrongLengthException;
 
 // TODO - LATER CREATE METHOD THAT CHECKS TO SEE IF TIMER IS 00:00
-// represents a timer
+// TODO - IMPLEMENT HOUR FUNCTIONALITY
+// represents a timer that counts down in minutes at seconds
 public class Timer {
     private int mins;
     private int secs;
@@ -113,7 +114,6 @@ public class Timer {
     }
 
     // GETTERS
-
     public int getMins() {
         return mins;
     }
