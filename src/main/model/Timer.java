@@ -8,12 +8,14 @@ import exceptions.WrongLengthException;
 // TODO - LATER CREATE METHOD THAT CHECKS TO SEE IF TIMER IS 00:00
 // represents a timer
 public class Timer {
+    private int hours;
     private int mins;
     private int secs;
     private boolean isCountingDown;
 
     // EFFECTS: creates a new timer object that has 0 hours, 0 mins, 0 secs, and isCountingDown == false
     public Timer() {
+        hours = 0;
         mins = 0;
         secs = 0;
         isCountingDown = false;
@@ -113,6 +115,9 @@ public class Timer {
     }
 
     // GETTERS
+    public int getHours() {
+        return hours;
+    }
 
     public int getMins() {
         return mins;
