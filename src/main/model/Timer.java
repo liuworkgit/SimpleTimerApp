@@ -21,13 +21,13 @@ public class Timer {
         isCountingDown = false;
     }
 
-    // REQUIRES: fullTime length is 4 digits - otherwise, throw WrongLengthException
-    //           The first two digits that correspond to minutes must be between 0 and 12
-    //           The remaining two digits that correspond to seconds must be between 00 and 59
-    //           If inputted number can't be reasonably parsed into mins and secs, throw InvalidTimeException
+    // REQUIRES: fullTime length is 6 digits - otherwise, throw WrongLengthException
+    //           The first two digits represent hours, must be between 0 and 99
+    //           The middle two digits represent minutes must, be between 0 and 59
+    //           The last two digits represent seconds, must be between 0 and 59
+    //           If inputted number can't be reasonably parsed, throw InvalidTimeException
     // EFFECTS: sets a time
-    // MODIFIES: this, mins, secs
-    // ex: mins must be between 0 and 12, secs must be between 0 and 59
+    // MODIFIES: this, hours, mins, secs
     public void setTime(String fullTime) throws WrongLengthException, InvalidTimeException {
         if (fullTime.length() != 4) {
             throw new WrongLengthException();
