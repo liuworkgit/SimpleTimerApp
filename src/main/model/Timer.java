@@ -22,9 +22,9 @@ public class Timer {
     }
 
     // REQUIRES: fullTime length is 6 digits - otherwise, throw WrongLengthException
-    //           The first two digits represent hours, must be between 0 and 99
-    //           The middle two digits represent minutes must, be between 0 and 59
-    //           The last two digits represent seconds, must be between 0 and 59
+    //           The first two digits represent hours, between [0, 99]
+    //           The middle two digits represent minutes, between [0, 59]
+    //           The last two digits represent seconds, between [0, 59]
     //           If inputted number can't be reasonably parsed, throw InvalidTimeException
     // EFFECTS: sets a time
     // MODIFIES: this, hours, mins, secs
@@ -43,9 +43,11 @@ public class Timer {
         }
     }
 
-    // EFFECTS: returns true if the given mins value is between 0 and 12,
-    //          and if the given secs value is between 0 and 59
-    public boolean areCorrectValues(int mins, int secs) {
+    // EFFECTS: returns true if:
+    //          - the given hours value is between 0 and 99
+    //          - the given mins value is between 0 and 59
+    //          - the given secs value is between 0 and 59
+    public boolean areCorrectValues(int hours, int mins, int secs) {
         return ((0 <= mins) && (mins <= 12)) && ((0 <= secs) && (secs <= 59));
     }
 
@@ -80,7 +82,7 @@ public class Timer {
 
     // EFFECTS: resets the timer.
     //          if isCountingDown == true, calls stopTimer(), then resets the timer
-    // MODIFIES: this, mins, secs, isCountingDown
+    // MODIFIES: this, hours, mins, secs, isCountingDown
     public void resetTimer() {
         if (isCountingDown) {
             stopTimer();
