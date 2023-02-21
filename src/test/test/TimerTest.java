@@ -17,7 +17,8 @@ class TimerTest {
     }
 
     @Test
-    /** Test constructor
+    /**
+     * Test constructor
      * */
     void testConstructor() {
         assertEquals(0, t.getHours());
@@ -138,24 +139,35 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests if timer can be successfully started
+     * */
     void testStartTimer() {
         t.startTimer();
         assertTrue(t.getCountdownStatus());
     }
 
     @Test
+    /**
+     * Tests if timer can be successfully stopped
+     * */
     void testStopTimer() {
         t.stopTimer();
         assertFalse(t.getCountdownStatus());
     }
 
     @Test
+    /**
+     * Tests if a stopped timer can be successfully reset
+     * */
     void testResetStoppedTimer() {
         try {
-            t.setTime("0139");
+            t.setTime("000139");
+            assertEquals(0, t.getHours());
             assertEquals(1, t.getMins());
             assertEquals(39, t.getSecs());
             t.resetTimer();
+            assertEquals(0, t.getHours());
             assertEquals(0, t.getMins());
             assertEquals(0, t.getSecs());
         } catch (WrongLengthException | InvalidTimeException e) {
@@ -164,13 +176,17 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests if possible to reset a timer that's still counting down
+     * */
     void testResetCountingTimer() {
         try {
-            t.setTime("0540");
+            t.setTime("010540");
             t.runTimer();
             assertTrue(t.getCountdownStatus());
             t.resetTimer();
             assertFalse(t.getCountdownStatus());
+            assertEquals(0, t.getHours());
             assertEquals(0, t.getMins());
             assertEquals(0, t.getSecs());
         } catch (WrongLengthException | InvalidTimeException e) {
@@ -179,18 +195,18 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests if able to count down (seconds only)
+     * */
     void testCountDownSecondsOnly() {
         try {
-            t.setTime("0005");
+            t.setTime("000005");
             t.countDown();
             while (t.getSecs() > 0) {
                 assertTrue(t.getCountdownStatus());
             }
             assertFalse(t.getCountdownStatus());
-            assertEquals(0, t.getMins());
             assertEquals(0, t.getSecs());
-            // while loop runs, assert isCountingDown is true
-            // after loop, mins and secs must be 0
         } catch (NotCountingDownException e) {
             fail("Exception shouldn't have been thrown (was counting down)");
         } catch (WrongLengthException | InvalidTimeException e) {
@@ -199,9 +215,12 @@ class TimerTest {
     }
 
     @Test
-    void testCountDownOneMinute() {
+    /**
+     * Tests if able to count down (minutes only)
+     */
+    void testCountDownMinutesOnly() {
         try {
-            t.setTime("0100");
+            t.setTime("000400");
             t.countDown();
             do {
                 assertTrue(t.getCountdownStatus());
@@ -212,6 +231,29 @@ class TimerTest {
             assertEquals(0, t.getSecs());
             // while loop runs, assert isCountingDown is true
             // after loop, mins and secs must be 0
+        } catch (NotCountingDownException e) {
+            fail("Exception should've have been thrown (was counting down)");
+        } catch (WrongLengthException | InvalidTimeException e) {
+            fail("Exception should't have been thrown.");
+        }
+    }
+
+    @Test
+    /**
+     * Tests if able to count down (hours only)
+     */
+    void testCountDownHoursOnly() {
+        try {
+            t.setTime("020000");
+            t.countDown();
+            do {
+                assertTrue(t.getCountdownStatus());
+            }
+            while (t.getHours() != 0 | t.getMins() != 0 | t.getSecs() != 0);
+            assertFalse(t.getCountdownStatus());
+            assertEquals(0, t.getHours());
+            assertEquals(0, t.getMins());
+            assertEquals(0, t.getSecs());
         } catch (NotCountingDownException e) {
             fail("Exception should've have been thrown (was counting down)");
         } catch (WrongLengthException | InvalidTimeException e) {
