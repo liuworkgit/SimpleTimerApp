@@ -30,18 +30,20 @@ public class Timer {
     // MODIFIES: this, hours, mins, secs
     // TODO - TEMP COMMENTING
     public void setTime(String fullTime) throws WrongLengthException, InvalidTimeException {
-//        if (fullTime.length() != 4) {
-//            throw new WrongLengthException();
-//        } else {
-//            int newMins = Integer.parseInt(fullTime.substring(0, 2));
-//            int newSecs = Integer.parseInt(fullTime.substring(2, 4));
-//            if (areCorrectValues(newMins, newSecs)) {
-//                mins = newMins;
-//                secs = newSecs;
-//            } else {
-//                throw new InvalidTimeException();
-//            }
-//        }
+        if (fullTime.length() != 6) {
+            throw new WrongLengthException();
+        } else {
+            int newHours = Integer.parseInt(fullTime.substring(0, 2));
+            int newMins = Integer.parseInt(fullTime.substring(2, 4));
+            int newSecs = Integer.parseInt(fullTime.substring(4, 6));
+            if (areCorrectValues(newHours, newMins, newSecs)) {
+                hours = newHours;
+                mins = newMins;
+                secs = newSecs;
+            } else {
+                throw new InvalidTimeException();
+            }
+        }
     }
 
     // EFFECTS: returns true if:
@@ -49,7 +51,9 @@ public class Timer {
     //          - the given mins value is between 0 and 59
     //          - the given secs value is between 0 and 59
     public boolean areCorrectValues(int hours, int mins, int secs) {
-        return ((0 <= mins) && (mins <= 12)) && ((0 <= secs) && (secs <= 59));
+        return ((0 <= hours) && (hours <= 99)) &&
+                ((0 <= mins) && (mins <= 12)) &&
+                ((0 <= secs) && (secs <= 59));
     }
 
     // REQUIRES: isCountingDown == false

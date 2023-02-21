@@ -131,6 +131,7 @@ class TimerTest {
                 assertTrue(t.getCountdownStatus());
             }
             while (t.getMins() != 0 | t.getSecs() != 0);
+            t.stopTimer();
             assertFalse(t.getCountdownStatus());
             assertEquals(0, t.getMins());
             assertEquals(0, t.getSecs());
