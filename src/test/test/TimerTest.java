@@ -6,6 +6,7 @@ import exceptions.WrongLengthException;
 import model.Timer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TimerTest {
@@ -252,6 +253,29 @@ class TimerTest {
             while (t.getHours() != 0 | t.getMins() != 0 | t.getSecs() != 0);
             assertFalse(t.getCountdownStatus());
             assertEquals(0, t.getHours());
+            assertEquals(0, t.getMins());
+            assertEquals(0, t.getSecs());
+        } catch (NotCountingDownException e) {
+            fail("Exception should've have been thrown (was counting down)");
+        } catch (WrongLengthException | InvalidTimeException e) {
+            fail("Exception should't have been thrown.");
+        }
+    }
+
+    @Test
+    /**
+     * Tests if able to count down (edge case - 59 minutes, 59 seconds)
+     * Note: testing 99 hours would take too long
+     */
+    void testCountDownEdgeCase() {
+        try {
+            t.setTime("005959");
+            t.countDown();
+            do {
+                assertTrue(t.getCountdownStatus());
+            }
+            while (t.getMins() != 0 | t.getSecs() != 0);
+            assertFalse(t.getCountdownStatus());
             assertEquals(0, t.getMins());
             assertEquals(0, t.getSecs());
         } catch (NotCountingDownException e) {
