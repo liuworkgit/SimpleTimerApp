@@ -52,7 +52,7 @@ public class Timer {
     //          - the given secs value is between 0 and 59
     public boolean areCorrectValues(int hours, int mins, int secs) {
         return ((0 <= hours) && (hours <= 99)) &&
-                ((0 <= mins) && (mins <= 12)) &&
+                ((0 <= mins) && (mins <= 59)) &&
                 ((0 <= secs) && (secs <= 59));
     }
 
@@ -67,6 +67,7 @@ public class Timer {
         } catch (NotCountingDownException e) {
             System.out.println("Countdown didn't start.");
             // TODO - WHAT GOES HERE?
+            // IDEAS - NOTHING HAPPENS, COUNTDOWN CONTINUES?
         } catch (CountdownActiveException e) {
             System.out.println("Countdown didn't end.");
             // TODO - WHAT GOES HERE?
@@ -101,17 +102,10 @@ public class Timer {
     // EFFECTS: counts down the timer value to 0
     // TODO
     public void countDown() throws NotCountingDownException {
-        if (isCountingDown) {
-//            if (mins = 0) {
-//                countDownSecs(secs);
-//            } else {
-//
-//            }
-//            // base case: mins = 0
-//            // reducing step: mins -= 1
-        } else {
-            throw new NotCountingDownException();
-        }
+        /**
+         * PSEUDOCODE:
+         *
+         */
     }
 
     // REQUIRES: isCountingDown == false
