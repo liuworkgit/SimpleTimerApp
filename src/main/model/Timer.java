@@ -6,14 +6,13 @@ import exceptions.NotCountingDownException;
 import exceptions.WrongLengthException;
 
 // TODO - LATER CREATE METHOD THAT CHECKS TO SEE IF TIMER IS 00:00
-// TODO - IMPLEMENT HOUR FUNCTIONALITY
-// represents a timer that counts down in minutes at seconds
+// represents a timer that counts down in minutes and seconds
 public class Timer {
     private int mins;
     private int secs;
     private boolean isCountingDown;
 
-    // EFFECTS: creates a new timer object that has 0 hours, 0 mins, 0 secs, and isCountingDown == false
+    // EFFECTS: creates a new timer object that has 0 mins, 0 secs, and isCountingDown == false
     public Timer() {
         mins = 0;
         secs = 0;
@@ -21,12 +20,11 @@ public class Timer {
     }
 
     // REQUIRES: fullTime length is 4 digits - otherwise, throw WrongLengthException
-    //           The first two digits that correspond to minutes must be between 0 and 12
-    //           The remaining two digits that correspond to seconds must be between 00 and 59
+    //           The first two digits = [0, 59]
+    //           The remaining two digits = [0, 59]
     //           If inputted number can't be reasonably parsed into mins and secs, throw InvalidTimeException
     // EFFECTS: sets a time
     // MODIFIES: this, mins, secs
-    // ex: mins must be between 0 and 12, secs must be between 0 and 59
     public void setTime(String fullTime) throws WrongLengthException, InvalidTimeException {
         if (fullTime.length() != 4) {
             throw new WrongLengthException();
@@ -42,10 +40,10 @@ public class Timer {
         }
     }
 
-    // EFFECTS: returns true if the given mins value is between 0 and 12,
+    // EFFECTS: returns true if the given mins value is between 0 and 59,
     //          and if the given secs value is between 0 and 59
     public boolean areCorrectValues(int mins, int secs) {
-        return ((0 <= mins) && (mins <= 12)) && ((0 <= secs) && (secs <= 59));
+        return ((0 <= mins) && (mins <= 59)) && ((0 <= secs) && (secs <= 59));
     }
 
     // REQUIRES: isCountingDown == false
@@ -93,17 +91,6 @@ public class Timer {
     // EFFECTS: counts down the timer value to 0
     // TODO
     public void countDown() throws NotCountingDownException {
-        if (isCountingDown) {
-//            if (mins = 0) {
-//                countDownSecs(secs);
-//            } else {
-//
-//            }
-//            // base case: mins = 0
-//            // reducing step: mins -= 1
-        } else {
-            throw new NotCountingDownException();
-        }
     }
 
     // REQUIRES: isCountingDown == false
