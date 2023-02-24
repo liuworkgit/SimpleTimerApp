@@ -88,7 +88,7 @@ public class Timer {
 
     // REQUIRES: isCountingDown == true
     //           otherwise, throw NotCountingDownException
-    // EFFECTS: counts down the timer value to 0
+    // EFFECTS: counts down the timer value to 0, then calls stopTimer
     // TODO
     public void countDown() throws NotCountingDownException {
     }
