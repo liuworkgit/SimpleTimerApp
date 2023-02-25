@@ -1,5 +1,6 @@
 package test;
 
+import exceptions.CountdownActiveException;
 import exceptions.InvalidTimeException;
 import exceptions.NotCountingDownException;
 import exceptions.WrongLengthException;
@@ -218,6 +219,10 @@ class TimerTest {
      * Tests the timer's ability to play a sound
      */
     void playAlarm() {
-
-    } // TODO - IMPLEMENT DURING GUI PHASE
+        try {
+            timer.playAlarm();
+        } catch (CountdownActiveException e) {
+            fail("Countdown active.");
+        }
+    }
 }

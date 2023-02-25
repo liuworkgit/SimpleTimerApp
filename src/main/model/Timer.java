@@ -5,7 +5,8 @@ import exceptions.InvalidTimeException;
 import exceptions.NotCountingDownException;
 import exceptions.WrongLengthException;
 
-// TODO - LATER CREATE METHOD THAT CHECKS TO SEE IF TIMER IS 00:00
+import java.awt.*;
+
 // represents a timer that counts down in minutes and seconds
 public class Timer {
     private int mins;
@@ -48,7 +49,6 @@ public class Timer {
 
     // REQUIRES: isCountingDown == false
     // EFFECTS: runs the timer from start to finish
-    // TODO
     public void runTimer() {
         try {
             startTimer();
@@ -56,10 +56,8 @@ public class Timer {
             playAlarm();
         } catch (NotCountingDownException e) {
             System.out.println("Countdown didn't start.");
-            // TODO - WHAT GOES HERE?
         } catch (CountdownActiveException e) {
             System.out.println("Countdown didn't end.");
-            // TODO - WHAT GOES HERE?
         }
     }
 
@@ -90,7 +88,6 @@ public class Timer {
     //           otherwise, throw NotCountingDownException
     // EFFECTS: counts down the timer value to 0, then calls stopTimer
     // MODIFIES: this, mins, secs
-    // TODO
     public void countDown() throws NotCountingDownException {
         while (secs > 0 | mins > 0) {
             if (secs == 0) {
@@ -111,8 +108,11 @@ public class Timer {
     // REQUIRES: isCountingDown == false
     //           otherwise, throw CountdownActiveException
     // EFFECTS: plays alarm
-    // TODO
     public void playAlarm() throws CountdownActiveException {
+        if (isCountingDown) {
+            throw new CountdownActiveException();
+        }
+        Toolkit.getDefaultToolkit().beep();
     }
 
     // GETTERS
