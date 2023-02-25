@@ -17,6 +17,9 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests constructor
+     */
     void testConstructor() {
         assertEquals(0, timer.getMins());
         assertEquals(0, timer.getSecs());
@@ -24,6 +27,9 @@ class TimerTest {
     }
 
     @Test
+    /**
+     *
+     */
     void testSetValidTimes() {
         try {
             timer.setTime("0532");
@@ -137,7 +143,7 @@ class TimerTest {
         try {
             timer.setTime("0540");
             timer.runTimer();
-            assertTrue(timer.getCountdownStatus());
+            assertFalse(timer.getCountdownStatus());
             timer.resetTimer();
             assertFalse(timer.getCountdownStatus());
             assertEquals(0, timer.getMins());

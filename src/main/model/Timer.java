@@ -89,8 +89,23 @@ public class Timer {
     // REQUIRES: isCountingDown == true
     //           otherwise, throw NotCountingDownException
     // EFFECTS: counts down the timer value to 0, then calls stopTimer
+    // MODIFIES: this, mins, secs
     // TODO
     public void countDown() throws NotCountingDownException {
+        while (secs > 0 | mins > 0) {
+            if (secs == 0) {
+                mins--;
+                secs = 59;
+            }
+            countSecs();
+        }
+        stopTimer();
+    }
+
+    // EFFECTS: counts down the secs value to 0
+    // MODIFIES: this, secs
+    private void countSecs() {
+        while (secs > 0) secs--;
     }
 
     // REQUIRES: isCountingDown == false
