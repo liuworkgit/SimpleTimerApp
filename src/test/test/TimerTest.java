@@ -28,7 +28,12 @@ class TimerTest {
 
     @Test
     /**
-     *
+     * Tests if able to set valid times, such as:
+     * - an arbitrary time that meets criteria
+     * - 0 mins, 0 secs
+     * - 59 mins, 59 secs
+     * - 59 mins, 0 secs
+     * - 0 mins, 59 secs
      */
     void testSetValidTimes() {
         try {
@@ -43,12 +48,23 @@ class TimerTest {
             timer.setTime("5959");
             assertEquals(59, timer.getMins());
             assertEquals(59, timer.getSecs());
+
+            timer.setTime("5900");
+            assertEquals(59, timer.getMins());
+            assertEquals(0, timer.getSecs());
+
+            timer.setTime("0059");
+            assertEquals(0, timer.getMins());
+            assertEquals(59, timer.getSecs());
         } catch (WrongLengthException | InvalidTimeException e) {
             fail("Exception thrown when shouldn't have.");
         }
     }
 
     @Test
+    /**
+     * Tests if exception thrown when given time input is too short
+     */
     void testSetTooShortTime() {
         try {
             timer.setTime("532");
@@ -61,6 +77,9 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests if exception thrown when given time input is too long
+     */
     void testSetTooLongTime() {
         try {
             timer.setTime("00532");
@@ -73,6 +92,9 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests if exception thrown when given time input isn't within 0-59 mins and 0-59 secs
+     */
     void testSetInvalidTime() {
         try {
             timer.setTime("6000");
@@ -173,6 +195,9 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests the timer's ability to count down a minute only
+     */
     void testCountDownOneMinute() {
         try {
             timer.setTime("0100");
@@ -189,6 +214,9 @@ class TimerTest {
     }
 
     @Test
+    /**
+     * Tests the timer's ability to play a sound
+     */
     void playAlarm() {
 
     } // TODO - IMPLEMENT DURING GUI PHASE
