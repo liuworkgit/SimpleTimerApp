@@ -89,6 +89,9 @@ public class Timer {
     // EFFECTS: counts down the timer value to 0, then calls stopTimer
     // MODIFIES: this, mins, secs
     public void countDown() throws NotCountingDownException {
+        if (!isCountingDown) {
+            throw new NotCountingDownException();
+        }
         while (secs > 0 | mins > 0) {
             if (secs == 0) {
                 mins--;
