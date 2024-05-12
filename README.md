@@ -1,4 +1,4 @@
-# SimpleTimerApp
+# One Hour Timer App
 A simple approximation of a timer that can count down from 59 minutes and 59 seconds. This project was coded entirely
 in Java and IntelliJ IDEA CE.
 
