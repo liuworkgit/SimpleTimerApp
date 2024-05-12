@@ -1,6 +1,8 @@
-# One Hour Timer App
-A simple approximation of a timer that can count down from 59 minutes and 59 seconds. This project was coded entirely
+# Timer App
+An approximation of a timer that can count down from 59 minutes and 59 seconds. This project was coded entirely
 in Java and IntelliJ IDEA CE.
+
+This project uses the Junit testing library 5.4.2.
 
 # User Stories
 This app should be able to do the following:
